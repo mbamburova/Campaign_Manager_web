@@ -32,13 +32,12 @@ public class HeroController extends HttpServlet {
                 //getting POST parameters from form
                 String name = request.getParameter("name");
                 String levelInput = request.getParameter("level");
-                if (!levelInput.isEmpty() || name == null || name.length() == 0){
+                if (levelInput.isEmpty() || name == null || name.length() == 0){
                     request.setAttribute("error", "Je nutné vyplnit všechny hodnoty !");
                     showHeroList(request, response);
                     return;
                 }
                 int level = Integer.parseInt(levelInput);
-                showHeroList(request, response);
 
                 try {
                     Hero hero = new Hero();
