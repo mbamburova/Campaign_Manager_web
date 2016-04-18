@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:c="http://java.sun.com/jsf/composite">
+<head>
+    <title>Start Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<a href="Hero/list">List of all heroes</a>
+
+<body>
+<h2>Table of heroes:</h2>
+<table border="1">
+    <tr>
+        <th>name</th>
+        <th>level</th>
+
+    </tr>
+    <c:forEach items="${heroes}" var="hero">
+        <tr>
+            <td><c:out value="${hero.name}"/></td>
+            <td><c:out value="${hero.level}"/></td>
+            <td><form method="post" action="hero/delete?id=${hero.id}"
+                      style="margin-bottom: 0;"><input type="submit" value="Smazat"></form></td>
+        </tr>
+        </tr>
+    </c:forEach>
+</table>
+
+<h2>Zadejte hrdinu</h2>
+<c:if test="${not empty chyba}">
+    <div style="border: solid 1px red; background-color: yellow; padding: 10px">
+        <c:out value="${chyba}"/>
+    </div>
+</c:if>
+<form action="/hero/add" method="post">
+    <table>
+        <tr>
+            <th>meno hrdinu:</th>
+            <td><input type="text" name="name" value=""/></td>
+        </tr>
+        <tr>
+            <th>level:</th>
+            <td><input type="text" name="author" value=""/></td>
+        </tr>
+    </table>
+    <input type="Submit" value="Zadat" />
+</form>
+
+</body>
+
+</body>
+</html>
