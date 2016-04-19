@@ -50,13 +50,14 @@
             <td><input type="text" name="name" value="<c:out value='${param.name}'/>"/></td>
         </tr>
         <tr>
-            <th>level:</th>
+            <th>Hero level:</th>
             <td><input type="text" name="level" value="<c:out value='${param.level}'/>"/></td>
         </tr>
     </table>
     <input type="Submit" value="Add" />
 </form>
 </c:if>
+
 
 <c:if test="${not empty update}">
     <h2>Update hero:</h2>
@@ -70,21 +71,16 @@
         <table>
             <tr>
                 <th>Name of hero:</th>
-                <td><input type="text" name="name" value="<c:out value='${param.name}'/>"/></td>
+                <td><input type="text" name="name"value="<c:out value='${param.name}'/>"/></td>
             </tr>
             <tr>
                 <th>level:</th>
                 <td><input type="text" name="level" value="<c:out value='${param.level}'/>"/></td>
             </tr>
         </table>
-        <input type="Submit" value="Add" />
+        <input type="Submit" value="Update" />
     </form>
 </c:if>
-
-
-
-
-
 
 </body>
 
