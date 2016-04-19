@@ -15,6 +15,7 @@ import java.io.IOException;
 public class HeroController extends HttpServlet {
 
     public static final String URL_MAPPING = "/hero";
+    private Long id;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +33,7 @@ public class HeroController extends HttpServlet {
                 //getting POST parameters from form
                 String name = request.getParameter("name");
                 String levelInput = request.getParameter("level");
-                if (levelInput.isEmpty() || name == null || name.length() == 0){
+                if (levelInput.isEmpty() || name.isEmpty()){
                     request.setAttribute("error", "Je nutné vyplnit všechny hodnoty !");
                     showHeroList(request, response);
                     return;
@@ -44,7 +45,6 @@ public class HeroController extends HttpServlet {
                     hero.setName(name);
                     hero.setLevel(level);
                     getHeroManager().createHero(hero);
-                    //redirect-after-POST protects from multiple submission
                     response.sendRedirect(request.getContextPath()+URL_MAPPING);
                     return;
                 } catch (Exception e) {
@@ -54,7 +54,7 @@ public class HeroController extends HttpServlet {
 
             case "/delete":
                 try {
-                    Long id = Long.valueOf(request.getParameter("id"));
+                    id = Long.valueOf(request.getParameter("id"));
                     getHeroManager().deleteHero(getHeroManager().findHeroById(id));
                     response.sendRedirect(request.getContextPath()+URL_MAPPING);
                     return;
@@ -62,6 +62,37 @@ public class HeroController extends HttpServlet {
                     response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
                     return;
                 }
+
+            case "/initUpdate" :
+                id = Long.valueOf(request.getParameter("id"));
+                request.setAttribute("update", "hero is being updated");
+                showHeroList(request, response);
+                response.sendRedirect(request.getContextPath()+URL_MAPPING);
+                break;
+
+            case "/update":
+                String nameForUpdate = request.getParameter("name");
+                String levelInputForUpdate = request.getParameter("level");
+                if (levelInputForUpdate.isEmpty() || nameForUpdate.isEmpty()){
+                    request.setAttribute("error", "Je nutné vyplnit všechny hodnoty !");
+                    showHeroList(request, response);
+                    return;
+                }
+                int levelForUpdate = Integer.parseInt(levelInputForUpdate);
+
+                try {
+                    Hero found = getHeroManager().findHeroById(id);
+
+                    found.setName(nameForUpdate);
+                    found.setLevel(levelForUpdate);
+                    getHeroManager().updateHero(found);
+                    showHeroList(request, response);
+                    return;
+                } catch (Exception e) {
+                    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+                    return;
+                 }
+
             default:
                 response.sendError(HttpServletResponse.SC_NOT_FOUND,
                         "Unknown action: " + action);

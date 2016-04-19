@@ -26,18 +26,23 @@
         <tr>
             <td><c:out value="${hero.name}"/></td>
             <td><c:out value="${hero.level}"/></td>
+            <td><form method="post" action="${pageContext.request.contextPath}/hero/initUpdate?id=${hero.id}"
+                      style="margin-bottom: 0;"><input type="submit" value="Update"></form></td>
             <td><form method="post" action="${pageContext.request.contextPath}/hero/delete?id=${hero.id}"
                       style="margin-bottom: 0;"><input type="submit" value="Delete"></form></td>
         </tr>
     </c:forEach>
 </table>
 
+
+<c:if test="${empty update}">
 <h2>Add hero:</h2>
-<c:if test="${not empty error}">
-    <div style="border: solid 1px red; background-color: yellow; padding: 10px">
-        <c:out value="${error}"/>
-    </div>
-</c:if>
+    <c:if test="${not empty error}">
+        <div style="border: solid 1px red; background-color: yellow; padding: 10px">
+            <c:out value="${error}"/>
+        </div>
+    </c:if>
+
 <form action="${pageContext.request.contextPath}/hero/add" method="post">
     <table>
         <tr>
@@ -51,6 +56,35 @@
     </table>
     <input type="Submit" value="Add" />
 </form>
+</c:if>
+
+<c:if test="${not empty update}">
+    <h2>Update hero:</h2>
+    <c:if test="${not empty error}">
+        <div style="border: solid 1px red; background-color: yellow; padding: 10px">
+            <c:out value="${error}"/>
+        </div>
+    </c:if>
+
+    <form action="${pageContext.request.contextPath}/hero/update" method="post">
+        <table>
+            <tr>
+                <th>Name of hero:</th>
+                <td><input type="text" name="name" value="<c:out value='${param.name}'/>"/></td>
+            </tr>
+            <tr>
+                <th>level:</th>
+                <td><input type="text" name="level" value="<c:out value='${param.level}'/>"/></td>
+            </tr>
+        </table>
+        <input type="Submit" value="Add" />
+    </form>
+</c:if>
+
+
+
+
+
 
 </body>
 
