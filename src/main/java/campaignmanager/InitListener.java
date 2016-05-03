@@ -37,6 +37,11 @@ public class InitListener implements ServletContextListener {
         HeroManagerImpl heroManager = new HeroManagerImpl();
         heroManager.setDataSource(dataSource);
         servletContextEvent.getServletContext().setAttribute("heroManager", heroManager);
+
+        MissionManagerImpl missionManager = new MissionManagerImpl();
+        missionManager.setDataSource(dataSource);
+        servletContextEvent.getServletContext().setAttribute("missionManager", missionManager);
+
     }
 
     @Override
