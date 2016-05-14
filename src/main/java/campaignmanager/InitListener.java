@@ -29,8 +29,8 @@ public class InitListener implements ServletContextListener {
             dataSource = CampaignDatabase.prepareDataSource();
             Connection connection = dataSource.getConnection();
             ScriptRunner scriptRunner = new ScriptRunner(connection);
-            scriptRunner.runScript(new BufferedReader(new FileReader("\\src\\main\\resources\\create_table.sql")));
-            scriptRunner.runScript(new BufferedReader(new FileReader("\\src\\main\\resources\\test_data.sql")));
+            scriptRunner.runScript(new BufferedReader(new FileReader("C:\\Users\\Michaela Bamburová\\Documents\\GitHub\\Campaign_Manager\\src\\main\\resources\\create_table.sql")));
+            scriptRunner.runScript(new BufferedReader(new FileReader("C:\\Users\\Michaela Bamburová\\Documents\\GitHub\\Campaign_Manager\\src\\main\\resources\\test_data.sql")));
         } catch (FileNotFoundException | SQLException e) {
             e.printStackTrace();
         }

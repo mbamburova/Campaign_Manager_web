@@ -18,6 +18,7 @@
 <h1>Mission list</h1>
 <table border="1">
     <tr>
+        <th>mission_name</th>
         <th>level_required</th>
         <th>capacity</th>
         <th>available</th>
@@ -25,6 +26,7 @@
     </tr>
     <c:forEach items="${mission}" var="mission">
         <tr>
+            <td><c:out value="${mission.mission_name}"/></td>
             <td><c:out value="${mission.levelRequired}"/></td>
             <td><c:out value="${mission.capacity}"/></td>
             <td><c:out value="${mission.available}"/></td>
@@ -40,6 +42,10 @@
 </c:if>
 <form action="${pageContext.request.contextPath}/mission/add" method="post">
     <table>
+        <tr>
+            <th>Mission name:</th>
+            <td><input type="text" name="level_required" value="<c:out value='${param.mission_name}'/>"/></td>
+        </tr>
         <tr>
             <th>Mission level required:</th>
             <td><input type="text" name="level_required" value="<c:out value='${param.level}'/>"/></td>

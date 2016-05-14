@@ -28,10 +28,11 @@ public class MissionController extends HttpServlet {
         switch (action) {
             case "/add":
 
+                String mission_name = request.getParameter("mission_name");
                 String levelInput = request.getParameter("level_required");
                 String capacityInput = request.getParameter("capacity");
                 String availableInput = request.getParameter("available");
-                if(availableInput.isEmpty() || levelInput.isEmpty() || capacityInput.isEmpty()){
+                if(mission_name.isEmpty() || availableInput.isEmpty() || levelInput.isEmpty() || capacityInput.isEmpty()){
                     request.setAttribute("error", "All values are required!");
                     showMissionList(request, response);
                     return;
@@ -49,6 +50,7 @@ public class MissionController extends HttpServlet {
 
                 try {
                     Mission mission = new Mission();
+                    mission.setMission_name(mission_name);
                     mission.setLevelRequired(level_required);
                     mission.setCapacity(capacity);
                     mission.setAvailable(available);
