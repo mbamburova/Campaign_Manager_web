@@ -44,7 +44,7 @@
     <table>
         <tr>
             <th>Mission name:</th>
-            <td><input type="text" name="level_required" value="<c:out value='${param.mission_name}'/>"/></td>
+            <td><input type="text" name="mission_name" value="<c:out value='${param.mission_name}'/>"/></td>
         </tr>
         <tr>
             <th>Mission level required:</th>
